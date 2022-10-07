@@ -20,6 +20,9 @@ const issIcon = L.icon({
 const marker = L.marker([0, 0], { icon: issIcon }).addTo(map);
 
 const api_url = "https://api.wheretheiss.at/v1/satellites/25544";
+
+let firstTime = true;
+
 async function getISS() {
   const response = await fetch(api_url);
   const data = await response.json();
@@ -28,8 +31,14 @@ async function getISS() {
 
   // L.marker([latitude, longitude]).addTo(map);
   marker.setLatLng([latitude, longitude]);
+  if (firstTime) {
+    map.setView([latitude, longitude], 5);
+    firstTime = false;
+  }
 
-  document.getElementById("lat").textContent = latitude;
-  document.getElementById("long").textContent = longitude;
+  document.getElementById("lat").textContent = latitude.toFixed(3);
+  document.getElementById("long").textContent = longitude.toFixed(3);
 }
 getISS();
+
+setInterval(getISS, 1000);
