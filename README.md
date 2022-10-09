@@ -1,3 +1,3 @@
 # ISS-Tracker
 
-JavaScipt Project ot tract position of iss 
+JavaScript Project ot tract position of iss 
